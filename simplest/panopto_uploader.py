@@ -219,3 +219,6 @@ class PanoptoUploader:
             
             if session_upload['State'] == 4: # Complete
                 break
+            # JEJ
+            if session_upload['State'] == 5: # Error, fix later.
+                break
