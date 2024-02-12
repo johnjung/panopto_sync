@@ -3,6 +3,7 @@
     panopto.py ls [--verbose] <folder-or-session-id>
     panopto.py get-access [--verbose] <folder-or-session-id>
     panopto.py update-access [--verbose] <folder-or-session-id> <inherited> <level>
+    panopto.py get-session [--verbose] <session-id>
 """
 
 import json, os, re, sys, urllib3
@@ -80,17 +81,15 @@ if __name__ == '__main__':
             arguments['<inherited>'],
             arguments['<level>']
         )
-    
 
-###
-# zul-jgold-050221pre.wav (was Restricted)
-# 	zul-jgold-050224sk.wav
-
-'''
-  3 1. check access for everything against site. 
-  4    update access.
-  5    campus only is "your organization"
-  6 2. when things are "open"
-  7    Settings > Downloads > Download enabled for "all users with access"
-  8    either do this automatically, or a report and then set manually.
-'''
+    if arguments['get-session']: 
+        session_mgr = PanoptoSessions(
+            PANOPTO_SERVER,
+            not PANOPTO_ALLOW_INSECURE_HTTP_REQUESTS,
+            oauth2
+        )
+        print(
+            json.dumps(
+                session_mgr.get_session(arguments['<session-id>'])
+            )
+        )
