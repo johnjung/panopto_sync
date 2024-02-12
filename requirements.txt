@@ -1,0 +1,5 @@
+boto3
+docopt
+requests
+requests_oauthlib
+urllib3
